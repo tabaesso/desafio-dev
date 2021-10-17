@@ -17,7 +17,7 @@ export const Title = styled.h1`
 `;
 
 export const ImportFileContainer = styled.section`
-  background: #fff;
+  background: #292929;
   margin-top: 40px;
   border-radius: 5px;
   padding: 64px;
@@ -43,7 +43,7 @@ export const Footer = styled.section`
 
   button {
     background: #03DAC5;
-    color: #fff;
+    color: #292929;
     border-radius: 5px;
     padding: 15px 80px;
     border: 0;
