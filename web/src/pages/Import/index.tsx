@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
 import { useHistory } from 'react-router-dom';
 
 import filesize from 'filesize';
@@ -18,18 +19,54 @@ interface FileProps {
   readableSize: string;
 }
 
+const normalizeFile = (fileContent: string) => {
+  const splittedContent = fileContent.split('\n');
+
+  if (!splittedContent) {
+    return undefined;
+  }
+
+  const content = splittedContent.map((text) => {
+    if (_.isEmpty(text)) {
+      return;
+    }
+
+    return {
+      type: text.substring(0, 1),
+      date: text.substring(1, 9),
+      value: Number(text.substring(9, 19)) / 100,
+      cpf: text.substring(19, 30),
+      card: text.substring(30, 42),
+      hour: text.substring(42, 48),
+      owner: text.substring(48, 62),
+      name: text.substring(62, 81),
+    };
+  });
+
+  return _.without(content, undefined);
+}
+
 const Import: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<FileProps[]>([]);
+  const [fileContent, setFileContent] = useState<string>();
   const history = useHistory();
 
   async function handleUpload(): Promise<void> {
-    const data = new FormData();
+    // const data = new FormData();
 
-    if (!uploadedFiles.length) return;
+    if (_.isEmpty(uploadedFiles)) {
+      return;
+    }
 
-    const file = uploadedFiles[0];
+    if (!fileContent) {
+      return;
+    }
 
-    data.append('file', file.file, file.name);
+    const normalizedContent = normalizeFile(fileContent);
+
+    // console.log(normalizedContent);
+
+    // data.append('file', file.file, file.name);
 
     // try {
     //   await api.post('', data);
@@ -45,6 +82,13 @@ const Import: React.FC = () => {
       name: file.name,
       readableSize: filesize(file.size),
     }));
+
+    const file = uploadFiles[0];
+
+    const reader = new FileReader();
+    reader.readAsText(file.file);
+    reader.addEventListener('load', (e: any) => setFileContent(e.target.result));
+
     setUploadedFiles(uploadFiles);
   }
 
