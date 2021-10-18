@@ -1,11 +1,10 @@
 module.exports = {
   type: 'postgres',
-  name: process.env.DATABASE_CONFIG_NAME || 'default',
   host: process.env.DATABASE_CONFIG_HOST || 'localhost',
   port: Number(process.env.DATABASE_CONFIG_PORT) || 5432,
   username: process.env.DATABASE_CONFIG_USERNAME || 'postgres',
   password: process.env.DATABASE_CONFIG_PASSWORD || 'docker',
-  database: process.env.DATABASE_CONFIG_DATABASE || 'desafio_dev',
+  database: process.env.DATABASE_CONFIG_DATABASE || 'desafiodev',
   entities: [
     "dist/modules/**/models/*{.ts,.js}",
     "src/modules/**/models/*{.ts,.js}"

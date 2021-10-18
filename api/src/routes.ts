@@ -1,9 +1,9 @@
 import { Router } from 'express';
-// import usersRouter from '@modules/users/controllers/routes/users.routes';
+import transactionsRouter from '@modules/transactions/controllers/routes/transactions.routes';
 
 const routes = Router();
 
-// routes.use('/transactions', usersRouter);
+routes.use('/transactions', transactionsRouter);
 
 routes.get('/health', (_req, res) => {
   res.json({ status: 'OK' });
