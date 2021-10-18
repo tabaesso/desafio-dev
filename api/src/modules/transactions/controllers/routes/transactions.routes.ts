@@ -23,4 +23,14 @@ transactionsRouter.post(
   transactionsController.create,
 );
 
+transactionsRouter.get(
+  '/',
+  transactionsController.find,
+);
+
+transactionsRouter.get(
+  '/:id',
+  transactionsController.findById,
+);
+
 export default transactionsRouter;

@@ -18,6 +18,12 @@ class TransactionsRepository implements ITransactionsRepository {
     return transaction;
   }
 
+  public async findAll(): Promise<Transaction[]> {
+    const transactions = await this.ormRepository.find();
+
+    return transactions;
+  }
+
   public async create(transactionData: ICreateTransactionDTO): Promise<Transaction> {
     const transaction = this.ormRepository.create(transactionData);
 
