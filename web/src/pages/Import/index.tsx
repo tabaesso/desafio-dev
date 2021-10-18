@@ -11,7 +11,7 @@ import Upload from '../../components/Upload';
 import { Container, Title, ImportFileContainer, Footer } from './styles';
 
 import alert from '../../assets/alert.svg';
-// import api from '../../services/api';
+import api from '../../services/api';
 
 interface FileProps {
   file: File;
@@ -52,9 +52,7 @@ const Import: React.FC = () => {
   const history = useHistory();
 
   async function handleUpload(): Promise<void> {
-    // const data = new FormData();
-
-    if (_.isEmpty(uploadedFiles)) {
+    if (!uploadedFiles) {
       return;
     }
 
@@ -64,16 +62,18 @@ const Import: React.FC = () => {
 
     const normalizedContent = normalizeFile(fileContent);
 
-    // console.log(normalizedContent);
+    if (!normalizedContent) {
+      return;
+    }
 
-    // data.append('file', file.file, file.name);
+    try {
+      // const transactions = await api.post('/transactions', normalizedContent);
+      // console.log(transactions);
 
-    // try {
-    //   await api.post('', data);
-    //   history.push('/');
-    // } catch (err) {
-    //   console.log(err.response.error);
-    // }
+      history.push('/');
+    } catch (error) {
+      history.push('/');
+    }
   }
 
   function submitFile(files: File[]): void {
