@@ -7,6 +7,36 @@ export const Container = styled.div`
   padding: 20px;
 `;
 
+export const CardContainer = styled.section`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -160px;
+`;
+
+export const Card = styled.div`
+  flex: 0.3;
+  background: #292929;
+  padding: 18px 32px;
+  border-radius: 5px;
+  color: #fff;
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      font-size: 16px;
+    }
+  }
+
+  h1 {
+    margin-top: 14px;
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 54px;
+  }
+`;
+
 export const TableContainer = styled.section`
   table {
     width: 100%;

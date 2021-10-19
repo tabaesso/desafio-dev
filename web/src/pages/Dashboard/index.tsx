@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 
 import Header from '../../components/Header';
 import api from '../../services/api';
 
-import { Container, TableContainer } from './styles';
+import { Container, TableContainer, CardContainer, Card } from './styles';
 import formatValue from '../../utils/formatValue';
 import formatCpf from '../../utils/formatCpf';
 import formatDate from '../../utils/formatDate';
+
+import total from '../../assets/total.svg';
 
 interface ITransactionDTO {
   type?: number;
@@ -58,10 +60,34 @@ const Dashboard: React.FC = () => {
     });
   }, []);
 
+  const totalValue = useMemo(() => {
+    let total = 0;
+
+    transactions.forEach((transaction) => {
+      if (transaction.type === 2 || transaction.type === 3 || transaction.type === 9) {
+        total = total - Number(transaction.value);
+      } else {
+        total = total + Number(transaction.value);
+      }
+    });
+
+    return total;
+  }, [transactions]);
+
   return (
     <>
-      <Header size="small"/>
+      <Header/>
       <Container>
+        <CardContainer>
+          <Card>
+            <header>
+              <p>Total</p>
+              <img src={total} alt="Total" />
+            </header>
+            <h1>{formatValue(totalValue)}</h1>
+          </Card>
+        </CardContainer>
+
         <TableContainer>
           <table>
             <thead>
