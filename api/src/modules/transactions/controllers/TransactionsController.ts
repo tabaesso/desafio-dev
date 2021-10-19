@@ -7,30 +7,12 @@ import FindAllTransactionService from '@modules/transactions/services/FindAllTra
 import FindByIdTransactionService from '@modules/transactions/services/FindByIdTransactionService';
 export default class TransactionsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const {
-      type,
-      date,
-      value,
-      cpf,
-      card,
-      hour,
-      owner,
-      name,
-    } = request.body;
+    const fileContent = request.body;
 
     const createTransaction = container.resolve(CreateTransactionService);
-    const transaction = await createTransaction.execute({
-      type,
-      date,
-      value,
-      cpf,
-      card,
-      hour,
-      owner,
-      name,
-    });
+    const transactions = await createTransaction.execute(fileContent);
 
-    return response.json(classToClass(transaction));
+    return response.json(classToClass(transactions));
   }
 
   public async find(request: Request, response: Response): Promise<Response> {

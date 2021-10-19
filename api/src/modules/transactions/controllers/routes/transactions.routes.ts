@@ -9,7 +9,7 @@ const transactionsController = new TransactionsController();
 transactionsRouter.post(
   '/',
   celebrate({
-    [Segments.BODY]: {
+    [Segments.BODY]: Joi.array().items({
       type: Joi.number(),
       date: Joi.date(),
       value: Joi.number(),
@@ -18,7 +18,7 @@ transactionsRouter.post(
       hour: Joi.string(),
       owner: Joi.string(),
       name: Joi.string(),
-    },
+    }),
   }),
   transactionsController.create,
 );

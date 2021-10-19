@@ -12,29 +12,22 @@ class CreateTransactionService {
     private transactionsRepository: ITransactionsRepository,
   ) {}
 
-  public async execute({
-    type,
-    date,
-    value,
-    cpf,
-    card,
-    hour,
-    owner,
-    name,
-  }: ICreateTransactionDTO): Promise<Transaction> {
+  public async execute(fileContent: ICreateTransactionDTO[]): Promise<Transaction[]> {
 
-    const transaction = await this.transactionsRepository.create({
-      type,
-      date,
-      value,
-      cpf,
-      card,
-      hour,
-      owner,
-      name,
-    });
+    const transactionsPromise = fileContent.map((file) => this.transactionsRepository.create({
+      type: file.type,
+      date: file.date,
+      value: file.value,
+      cpf: file.cpf,
+      card: file.card,
+      hour: file.hour,
+      owner: file.owner,
+      name: file.name,
+    }));
 
-    return transaction;
+    const transactions = await Promise.all(transactionsPromise);
+
+    return transactions;
   }
 }
 
