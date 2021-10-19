@@ -26,20 +26,7 @@ export const TableContainer = styled.section`
       border: 0;
       background: #292929;
       font-size: 16px;
-      font-weight: normal;
       color: #fff;
-
-      &.title {
-        font-weight: bold;
-      }
-
-      &.income {
-        color: #12a454;
-      }
-
-      &.outcome {
-        color: #e83f5b;
-      }
     }
 
     td:first-child {
