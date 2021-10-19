@@ -32,8 +32,8 @@ const normalizeFile = (fileContent: string) => {
     }
 
     return {
-      type: text.substring(0, 1),
-      date: text.substring(1, 9),
+      type: Number(text.substring(0, 1)),
+      date: `${text.substring(1, 5)}-${text.substring(5, 7)}-${text.substring(7, 9)}`,
       value: Number(text.substring(9, 19)) / 100,
       cpf: text.substring(19, 30),
       card: text.substring(30, 42),
@@ -67,9 +67,8 @@ const Import: React.FC = () => {
     }
 
     try {
-      // const transactions = await api.post('/transactions', normalizedContent);
-      // console.log(transactions);
-
+      const transactions = await api.post('/transactions', normalizedContent);
+      console.log(transactions);
       history.push('/');
     } catch (error) {
       history.push('/');
