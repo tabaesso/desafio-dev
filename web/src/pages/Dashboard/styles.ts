@@ -57,6 +57,16 @@ export const TableContainer = styled.section`
       background: #292929;
       font-size: 16px;
       color: #fff;
+
+      &.income {
+        font-weight: bold;
+        color: #42f593;
+      }
+
+      &.outcome {
+        font-weight: bold;
+        color: #eb5e75;
+      }
     }
 
     td:first-child {

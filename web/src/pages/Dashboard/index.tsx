@@ -109,7 +109,13 @@ const Dashboard: React.FC = () => {
                   <td>{transaction.card}</td>
                   <td>{formatDate(transaction.date)}</td>
                   <td>{transaction.hour}</td>
-                  <td>{formatValue(transaction.value || 0)}</td>
+                  <td className={
+                    transaction.type === 2 ||
+                    transaction.type === 3 ||
+                    transaction.type === 9 ?
+                    'outcome' : 'income'}>
+                      {formatValue(transaction.value || 0)}
+                  </td>
                 </tr>
               ))}
             </tbody>
