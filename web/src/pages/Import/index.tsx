@@ -37,7 +37,7 @@ const normalizeFile = (fileContent: string) => {
       value: Number(text.substring(9, 19)) / 100,
       cpf: text.substring(19, 30),
       card: text.substring(30, 42),
-      hour: text.substring(42, 48),
+      hour: `${text.substring(42, 44)}:${text.substring(44, 46)}:${text.substring(46, 48)}`,
       owner: text.substring(48, 62),
       name: text.substring(62, 81),
     };
